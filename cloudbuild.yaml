@@ -18,3 +18,4 @@
    - 'uscentral-1'
  images:
  - 'gcr.io/kirsch-data-platform/add-hc-pricing-data:$COMMIT_SHA'
+ 
