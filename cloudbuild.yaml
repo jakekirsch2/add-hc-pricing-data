@@ -5,17 +5,4 @@
  # Push the container image to Container Registry
  - name: 'gcr.io/cloud-builders/docker'
    args: ['push', 'gcr.io/kirsch-data-platform/add-hc-pricing-data:$COMMIT_SHA']
- # Deploy container image to Cloud Run
- - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-   entrypoint: gcloud
-   args:
-   - 'run'
-   - 'deploy'
-   - 'add-hc-pricing-data'
-   - '--image'
-   - 'gcr.io/kirsch-data-platform/add-hc-pricing-data:$COMMIT_SHA'
-   - '--region'
-   - 'us-central1'
- images:
- - 'gcr.io/kirsch-data-platform/add-hc-pricing-data:$COMMIT_SHA'
  
