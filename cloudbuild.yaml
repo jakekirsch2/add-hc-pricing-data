@@ -1,8 +1,8 @@
  steps:
  # Build the container image
  - name: 'gcr.io/cloud-builders/docker'
-   args: ['build', '-t', 'gcr.io/kirsch-data-platform/add-hc-pricing-data:$COMMIT_SHA', '.']
- # Push the container image to Container Registry
+   args: ['build', '-t', '${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_IMAGE}', '.' ]
+ # Push the container image to Artifact Registry
  - name: 'gcr.io/cloud-builders/docker'
-   args: ['push', 'gcr.io/kirsch-data-platform/add-hc-pricing-data:$COMMIT_SHA']
+   args: ['push', '${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_IMAGE}']
  
