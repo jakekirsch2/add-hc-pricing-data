@@ -5,7 +5,7 @@ steps:
   args:
   - 'build'
   - '-t'
-  - 'us-central1-docker.pkg.dev/kirsch-data-platform/add-hc-pricing-data/hello-cloudbuild:$SHORT_SHA'
+  - 'us-central1-docker.pkg.dev/kirsch-data-platform/docker-repository/add-hc-pricing-data:$SHORT_SHA'
   - '.'
 
 # This step pushes the image to Artifact Registry
@@ -15,4 +15,4 @@ steps:
   id: Push
   args:
   - 'push'
-  - 'us-central1-docker.pkg.dev/kirsch-data-platform/add-hc-pricing-data/hello-cloudbuild:$SHORT_SHA'
+  - 'us-central1-docker.pkg.dev/kirsch-data-platform/docker-repository/add-hc-pricing-data:$SHORT_SHA'
