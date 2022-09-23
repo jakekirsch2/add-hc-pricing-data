@@ -2,6 +2,8 @@
  # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'us-central1-docker.pkg.dev/kirsch-data-platform/add-hc-pricing-data/1', '.' ]
+images:
+- 'us-central1-docker.pkg.dev/kirsch-data-platform/add-hc-pricing-data/1'
  # Push the container image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/kirsch-data-platform/add-hc-pricing-data/1' ]
