@@ -1,10 +1,18 @@
- steps:
- # Build the container image
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/kirsch-data-platform/add-hc-pricing-data/1', '.' ]
-images:
-- 'us-central1-docker.pkg.dev/kirsch-data-platform/add-hc-pricing-data/1'
- # Push the container image to Artifact Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/kirsch-data-platform/add-hc-pricing-data/1' ]
- 
+steps:
+# This step builds the container image.
+- name: 'gcr.io/cloud-builders/docker'
+  id: Build
+  args:
+  - 'build'
+  - '-t'
+  - 'us-central1-docker.pkg.dev/kirsch-data-platform/add-hc-pricing-data/hello-cloudbuild:$SHORT_SHA'
+  - '.'
+
+# This step pushes the image to Artifact Registry
+# The PROJECT_ID and SHORT_SHA variables are automatically
+# replaced by Cloud Build.
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push
+  args:
+  - 'push'
+  - 'us-central1-docker.pkg.dev/kirsch-data-platform/add-hc-pricing-data/hello-cloudbuild:$SHORT_SHA'
