@@ -1,12 +1,8 @@
 #curl -m 3610 -X POST https://add-hc-pricing-data-gwmmhrzkra-uc.a.run.app -H "Authorization: bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json" -d '{"company": "uhc", "file_url": "https://uhc-tic-mrf.azureedge.net/public-mrf/2022-09-01/2022-09-01_Bind-Benefits--Inc-_TPA_UNITEDHEALTHCARE-CHOICE-PLUS_UCQ_in-network-rates.json.gz", "file_name": "2022-09-01_Bind-Benefits--Inc-_TPA_UNITEDHEALTHCARE-CHOICE-PLUS_UCQ_in-network-rates.json.gz"}'
-#curl -m 3610 -X POST http://10.65.0.2:8000 -H "Authorization: bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json" -d '{"company": "uhc", "file_url": "https://uhc-tic-mrf.azureedge.net/public-mrf/2022-09-01/2022-09-01_Bind-Benefits--Inc-_TPA_UNITEDHEALTHCARE-CHOICE-PLUS_UCQ_in-network-rates.json.gz", "file_name": "2022-09-01_Bind-Benefits--Inc-_TPA_UNITEDHEALTHCARE-CHOICE-PLUS_UCQ_in-network-rates.json.gz"}'
+#curl -m 3610 -X POST http://10.65.0.5:8000 -H "Authorization: bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json" -d '{"company": "uhc", "file_url": "https://uhc-tic-mrf.azureedge.net/public-mrf/2022-09-01/2022-09-01_Bind-Benefits--Inc-_TPA_UNITEDHEALTHCARE-CHOICE-PLUS_UCQ_in-network-rates.json.gz", "file_name": "2022-09-01_Bind-Benefits--Inc-_TPA_UNITEDHEALTHCARE-CHOICE-PLUS_UCQ_in-network-rates.json.gz"}'
 
-
-from flask import Flask, request
 import os
-app = Flask(__name__)
 
-@app.route('/', methods = ['POST'])
 def main():
     return "Hello Jake"
     # message = request.get_json(force=True)
@@ -17,7 +13,3 @@ def main():
     # return "SUCCESS"
     #wget 
     
-
-if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 8000))
-    app.run(debug=True, host='0.0.0.0', port=port)
