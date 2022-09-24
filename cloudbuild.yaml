@@ -20,6 +20,6 @@ steps:
   args:
   - run
   - --filename=./deployment.yaml
-  - --image=us-central1-docker.pkg.dev/kirsch-data-platform/docker-repository/add-hc-pricing-data:latest
+  - --image=us-central1-docker.pkg.dev/kirsch-data-platform/docker-repository/add-hc-pricing-data:$SHORT_SHA
   - --location=us-central1
   - --cluster=kirsch-data-platform-gke
