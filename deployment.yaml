@@ -10,43 +10,29 @@ spec:
   - port: 80
     targetPort: 8000
 ---
-apiVersion: "apps/v1"
-kind: "Deployment"
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: "add-hc-pricing-data"
-  namespace: "default"
-  labels:
-    app: "add-hc-pricing-data"
+  name: add-hc-pricing-data
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: "add-hc-pricing-data"
+      app: add-hc-pricing-data
   template:
     metadata:
       labels:
-        app: "add-hc-pricing-data"
+        app: add-hc-pricing-data
     spec:
       containers:
-      - name: "add-hc-pricing-data-sha256-1"
-        image: "us-central1-docker.pkg.dev/kirsch-data-platform/docker-repository/add-hc-pricing-data:latest"
+      - name: add-hc-pricing-data
+        # Replace $LOCATION with your Artifact Registry location (e.g., us-west1).
+        # Replace $GCLOUD_PROJECT with your project ID.
+        image: us-central1-docker.pkg.dev/kirsch-data-platform/docker-repository/add-hc-pricing-data:latest
+        # This app listens on port 8080 for web traffic by default.
+        ports:
+        - containerPort: 8000
+        env:
+          - name: PORT
+            value: "8000"
 ---
-apiVersion: "autoscaling/v2beta2"
-kind: "HorizontalPodAutoscaler"
-metadata:
-  name: "add-hc-pricing-data-hpa-wcch"
-  namespace: "default"
-  labels:
-    app: "add-hc-pricing-data"
-spec:
-  scaleTargetRef:
-    kind: "Deployment"
-    name: "add-hc-pricing-data"
-    apiVersion: "apps/v1"
-  minReplicas: 1
-  maxReplicas: 5
-  metrics:
-  - type: "Resource"
-    resource:
-      name: "cpu"
-      targetAverageUtilization: 80
