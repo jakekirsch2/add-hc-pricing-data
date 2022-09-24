@@ -16,3 +16,10 @@ steps:
   args:
   - 'push'
   - 'us-central1-docker.pkg.dev/kirsch-data-platform/docker-repository/add-hc-pricing-data:$SHORT_SHA'
+- name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=./deployment.yaml
+  - --image=us-central1-docker.pkg.dev/kirsch-data-platform/docker-repository/add-hc-pricing-data:latest
+  - --location=us-central1
+  - --cluster=kirsch-data-platform-gke

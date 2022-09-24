@@ -1,0 +1,41 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "add-hc-pricing-data"
+  namespace: "default"
+  labels:
+    app: "add-hc-pricing-data"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "add-hc-pricing-data"
+  template:
+    metadata:
+      labels:
+        app: "add-hc-pricing-data"
+    spec:
+      containers:
+      - name: "add-hc-pricing-data-sha256-1"
+        image: "us-central1-docker.pkg.dev/kirsch-data-platform/docker-repository/add-hc-pricing-data:latest"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "add-hc-pricing-data-hpa-wcch"
+  namespace: "default"
+  labels:
+    app: "add-hc-pricing-data"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "add-hc-pricing-data"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
