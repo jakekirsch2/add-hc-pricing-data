@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello
+  name: add-hc-pricing-data
 spec:
   type: LoadBalancer
   selector:
-    app: hello
+    app: add-hc-pricing-data
   ports:
   - port: 80
     targetPort: 8000
@@ -31,7 +31,7 @@ spec:
       - name: "add-hc-pricing-data-sha256-1"
         image: "us-central1-docker.pkg.dev/kirsch-data-platform/docker-repository/add-hc-pricing-data:latest"
 ---
-apiVersion: "autoscaling/v2beta1"
+apiVersion: "autoscaling/v2beta2"
 kind: "HorizontalPodAutoscaler"
 metadata:
   name: "add-hc-pricing-data-hpa-wcch"
