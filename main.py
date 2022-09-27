@@ -11,6 +11,7 @@ def main(args):
     file_url = args.file_url
     file_name = args.file_name
     try:
+        os.system("gooogle cloud auth list")
         os.system(f"curl '{file_url}' | gsutil cp - gs://data-platform-data/{company}/{file_name}")
         return "Success"
     except Exception as e:
