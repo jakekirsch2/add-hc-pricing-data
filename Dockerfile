@@ -11,6 +11,3 @@ RUN pip3 install -r requirements.txt
 
 #copy files
 COPY . .
-
-#run flask app
-CMD ["python3", "app.py"]
