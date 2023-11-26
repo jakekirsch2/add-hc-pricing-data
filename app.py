@@ -34,7 +34,7 @@ async def download_data(link):
     file_name = file_name.split("?")[0]
     print(f"Downloading {file_name} from {link}")
     #async call " curl '{link}' | gsutil cp - gs://healthcare-raw-files/unacked/cigna/{file_name}"
-    subprocess.run(["curl", link, "|", "gsutil", "cp", "-", f"gs://healthcare-raw-files/unacked/cigna/{file_name}"])
+    subprocess.run([f"curl '{link}' | gsutil cp - gs://healthcare-raw-files/unacked/cigna/{file_name}"], shell=True)
     # dont complete until file is downloaded
     print(f"Downloaded {file_name} from {link}")
     return "SUCCESS"
