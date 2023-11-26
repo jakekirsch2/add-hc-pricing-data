@@ -35,7 +35,9 @@ async def download_data(link):
     print(f"Downloading {file_name} from {link}")
     #async call " curl '{link}' | gsutil cp - gs://healthcare-raw-files/unacked/cigna/{file_name}"
     subprocess.run(["curl", link, "|", "gsutil", "cp", "-", f"gs://healthcare-raw-files/unacked/cigna/{file_name}"], shell=True)
+    # dont complete until file is downloaded
     print(f"Downloaded {file_name} from {link}")
+    return "SUCCESS"
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8000))
