@@ -4,12 +4,12 @@ from flask import Flask, request
 import os
 app = Flask(__name__)
 
-@app.route('/', methods = ['POST'])
+@app.route('/copy-data', methods = ['POST'])
 def main():
     message = request.get_json(force=True)
     file_url = message['file_url']
     file_path = message['file_path']
-    os.system(f" curl '{file_url}' | gsutil cp - {file_path}")
+    os.system(f"curl '{file_url}' | gsutil cp - {file_path}")
     return "SUCCESS"
     #wget 
     
