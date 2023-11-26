@@ -4,6 +4,7 @@ from flask import Flask, request
 import os
 from cigna.parse_file import parse_file
 import asyncio
+import subprocess
 app = Flask(__name__)
 
 @app.route('/get-cigna', methods = ['POST'])
@@ -32,7 +33,8 @@ async def download_data(link):
     file_name = file_name[-3] + "/" + file_name[-2] + "/" + file_name[-1]
     file_name = file_name.split("?")[0]
     print(f"Downloading {file_name} from {link}")
-    os.system(f" curl '{link}' | gsutil cp - gs://healthcare-raw-files/unacked/cigna/{file_name}")
+    #async call " curl '{link}' | gsutil cp - gs://healthcare-raw-files/unacked/cigna/{file_name}"
+    subprocess.run(["curl", link, "|", "gsutil", "cp", "-", f"gs://healthcare-raw-files/unacked/cigna/{file_name}"], shell=True)
     print(f"Downloaded {file_name} from {link}")
 
 if __name__ == "__main__":
