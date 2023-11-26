@@ -13,7 +13,7 @@ def get_cigna():
     for link in data:
         file_name = link.split('/')[-1]
         print(f"Downloading {file_name} from {link}")
-        os.system(f" curl '{link}' | gsutil cp - gs://data-platform-data/unacked/{file_name}")
+        os.system(f" curl '{link}' | gsutil cp - gs://healthcare-raw-files/unacked/{file_name}")
     return "SUCCESS"
     #wget 
     
