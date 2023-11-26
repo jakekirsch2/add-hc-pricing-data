@@ -7,10 +7,9 @@ app = Flask(__name__)
 @app.route('/', methods = ['POST'])
 def main():
     message = request.get_json(force=True)
-    company = message['company']
     file_url = message['file_url']
-    file_name = message['file_name']
-    os.system(f" curl '{file_url}' | gsutil cp - gs://data-platform-data/{company}/{file_name}")
+    file_path = message['file_path']
+    os.system(f" curl '{file_url}' | gsutil cp - {file_path}")
     return "SUCCESS"
     #wget 
     
