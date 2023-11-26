@@ -15,7 +15,7 @@ def get_cigna():
     else:
         concurrent_tasks = 100
     data = parse_file(url)
-    loop = asyncio.get_event_loop()
+    loop = asyncio.new_event_loop()
     tasks = []
     #loop through data 100 at a time
     for i in range(0, len(data), concurrent_tasks):
@@ -24,6 +24,7 @@ def get_cigna():
             tasks.append(asyncio.ensure_future(download_data(link)))
         loop.run_until_complete(asyncio.wait(tasks))
         loop.close()
+        loop = asyncio.new_event_loop()
         tasks = []        
     return "SUCCESS"
     #wget 
