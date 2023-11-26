@@ -27,14 +27,15 @@ def get_cigna():
         loop.run_until_complete(asyncio.wait(tasks))
         tasks = []        
     return "SUCCESS"
-    #wget 
+
+ 
 async def download_data(link):
     file_name = link.split("/")
     file_name = file_name[-3] + "/" + file_name[-2] + "/" + file_name[-1]
     file_name = file_name.split("?")[0]
     print(f"Downloading {file_name} from {link}")
     #async call " curl '{link}' | gsutil cp - gs://healthcare-raw-files/unacked/cigna/{file_name}"
-    subprocess.run([f"curl '{link}' | gsutil cp - gs://healthcare-raw-files/unacked/cigna/{file_name}"], shell=True)
+    await subprocess.run([f"curl '{link}' | gsutil cp - gs://healthcare-raw-files/unacked/cigna/{file_name}"], shell=True)
     # dont complete until file is downloaded
     print(f"Downloaded {file_name} from {link}")
     return "SUCCESS"
