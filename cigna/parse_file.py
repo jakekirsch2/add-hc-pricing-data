@@ -12,6 +12,7 @@ def parse_file(url):
             continue
         if plan["allowed_amount_file"]["location"] not in list_of_files:
             list_of_files.append(plan["allowed_amount_file"]["location"])
+    list_of_files = list(set(list_of_files))
     return list_of_files
 
 def download_file(url):
