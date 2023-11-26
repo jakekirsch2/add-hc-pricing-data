@@ -2,15 +2,18 @@
 
 from flask import Flask, request
 import os
+from cigna import parse_file
 app = Flask(__name__)
 
-@app.route('/', methods = ['POST'])
-def main():
+@app.route('/get-cigna', methods = ['POST'])
+def get_cigna():
     message = request.get_json(force=True)
-    company = message['company']
-    file_url = message['file_url']
-    file_name = message['file_name']
-    os.system(f" curl '{file_url}' | gsutil cp - gs://data-platform-data/{company}/{file_name}")
+    url = message['url']
+    data = parse_file(url)
+    for link in data:
+        file_name = link.split('/')[-1]
+        print(f"Downloading {file_name} from {link}")
+        os.system(f" curl '{link}' | gsutil cp - gs://data-platform-data/unacked/{file_name}")
     return "SUCCESS"
     #wget 
     
